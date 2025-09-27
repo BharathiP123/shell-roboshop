@@ -9,7 +9,6 @@ N="\e[0m"
 LOGS_FOLDER="/var/log/roboshop-script"
 SCRIPT_NAME=$( echo $0 | cut -d "." -f1 )
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log" # /var/log/shell-script/16-logs.log
-pwd=$(PWD)
 
 mkdir -p $LOGS_FOLDER
 echo "Script started executed at: $(date)" | tee -a $LOG_FILE
@@ -36,3 +35,7 @@ systemctl enable mongod
 VALIDATE $? "enabled the mongodb to run at the boot level"
 systemctl start mongod 
 VALIDATE $? "started the mongodb level"
+sed -i 's/127.0.0.1/0.0.0.0' /etc/mongod.conf
+VALIDATE $? "Updated the mogod configuration file" &>>$LOG_FILE
+systemctl restart mongod
+VALIDATE $? "Restarted the mongod" &>>$LOG_FILE
