@@ -35,7 +35,7 @@ systemctl enable mongod
 VALIDATE $? "enabled the mongodb to run at the boot level"
 systemctl start mongod 
 VALIDATE $? "started the mongodb level"
-sed -i 's/127.0.0.1/0.0.0.0' /etc/mongod.conf
+sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf
 VALIDATE $? "Updated the mogod configuration file" &>>$LOG_FILE
 systemctl restart mongod
 VALIDATE $? "Restarted the mongod" &>>$LOG_FILE
