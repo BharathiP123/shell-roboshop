@@ -29,11 +29,12 @@ VALIDATE(){ # functions receive inputs through args just like shell script args
 
 ##### redis install ####
 cp $SCRIPT_DIR/rabbitmq.repo  /etc/yum.repos.d/rabbitmq.repo
+VALIDATE $? "Adding rabbitMQ repo"
 dnf install rabbitmq-server -y &>>$LOG_FILE
 VALIDATE $? "installed rabbitmq server"
 
-systemctl enable rabbitmq-server &>>$LOGS_FOLDER
-systemctl start rabbitmq-server &>>$LOGS_FOLDER
+systemctl enable rabbitmq-server &>>$LOG_FILE
+systemctl start rabbitmq-server &>>$LOG_FILE
 
 rabbitmqctl add_user roboshop roboshop123
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
