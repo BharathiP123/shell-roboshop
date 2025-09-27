@@ -9,6 +9,7 @@ N="\e[0m"
 LOGS_FOLDER="/var/log/roboshop-script"
 SCRIPT_NAME=$( echo $0 | cut -d "." -f1 )
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log" # /var/log/shell-script/16-logs.log
+pwd=$(PWD)
 
 mkdir -p $LOGS_FOLDER
 echo "Script started executed at: $(date)" | tee -a $LOG_FILE
@@ -27,7 +28,7 @@ VALIDATE(){ # functions receive inputs through args just like shell script args
     fi
 }
 
-cp mango.repo /etc/yum.repos.d/mongo.repo
+cp $pwd/mango.repo /etc/yum.repos.d/mongo.repo
 VALIDATE $? "Adding mangorepo" 
 dnf install mongodb-org -y  &>>LOG_FILE
 VALIDATE $? "installing mongoDB"
