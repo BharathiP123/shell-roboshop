@@ -35,7 +35,7 @@ VALIDATE $? "enable  nodejs" &>>$LOG_FILE
 dnf install nodejs -y &>>$LOG_FILE
 VALIDATE $? "installed nodejs" &>>$LOG_FILE
 useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
-mkdir /app 
+mkdir -p /app 
 VALIDATE $? "creating app directory" &>>$LOG_FILE
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip 
 VALIDATE $? "download the code" &>>$LOG_FILE
