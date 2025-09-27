@@ -28,9 +28,9 @@ VALIDATE(){ # functions receive inputs through args just like shell script args
     fi
 }
 
-cp $pwd/mango.repo /etc/yum.repos.d/mongo.repo
+cp mango.repo /etc/yum.repos.d/mongo.repo
 VALIDATE $? "Adding mangorepo" 
-dnf install mongodb-org -y  &>>LOG_FILE
+dnf install mongodb-org -y  &>>$LOG_FILE
 VALIDATE $? "installing mongoDB"
 systemctl enable mongod 
 VALIDATE $? "enabled the mongodb to run at the boot level"
