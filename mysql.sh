@@ -34,6 +34,7 @@ VALIDATE $? "installed mysql server"
 systemctl enable mysqld  &>>$LOG_FILE
 systemctl start mysqld   &>>$LOG_FILE
 mysql_secure_installation --set-root-pass RoboShop@1
+
 END_TIME=$(date +%s)
 TOTAL_TIME=$(( $END_TIME - $START_TIME ))
 echo -e "Script executed in: $Y $TOTAL_TIME Seconds $N"
